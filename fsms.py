@@ -30,8 +30,10 @@ class FSMS:
         print(".........Generating Statistics.......")
         print("First 5 rows....",self.df.head())
         print("Basic Statistics", self.df.describe())
+        print("Moving to Cleaning fsm")
 
     def cleaning_dataset(self):
+        print(".....Cleaning Started......")
         self.df.drop_duplicates(inplace=True)
         self.df.dropna(axis=1,how='all',inplace=True)
         print("shape after dropping columns that are having completely Nan or empty",self.df.shape)
