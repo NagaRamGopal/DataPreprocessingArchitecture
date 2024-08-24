@@ -11,7 +11,7 @@ class FSMS:
 
     def pass_dataset(self):
         try:
-            self.df = pd.read_csv(r"C:\Users\ramgo\OneDrive\Desktop\Learn\DiwaliSalesAnalysis\DiwaliSales\CleanedData.csv")
+            self.df = pd.read_csv(r"C:\Users\ramgo\OneDrive\Desktop\Learn\DiwaliSalesAnalysis\DiwaliSales\CleanedData.csv", encoding='utf-8')
         except:
             print("Please check the file/path given")
             exit()
