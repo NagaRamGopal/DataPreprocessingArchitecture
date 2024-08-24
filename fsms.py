@@ -29,12 +29,24 @@ class FSMS:
     def dataset_statistics(self):
         print(".........Generating Statistics.......")
         print("First 5 rows....",self.df.head())
-        print(self.df.describe())
-        
+        print("Basic Statistics", self.df.describe())
+
+    def cleaning_dataset(self):
+        self.df.drop_duplicates(inplace=True)
+        self.df.dropna(axis=1,how='all',inplace=True)
+        print("shape after dropping columns that are having completely Nan or empty",self.df.shape)
+        print(self.df.head())
 
     def run_all(self):
         self.pass_dataset()
         self.EDABeforeStandardized()
         self.dataset_statistics()
+        self.cleaning_dataset()
+
+    
+    
+    
+
+
 obj=FSMS()
 obj.run_all()
