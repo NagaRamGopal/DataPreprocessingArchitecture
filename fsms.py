@@ -28,7 +28,9 @@ class FSMS:
 
     def dataset_statistics(self):
         print(".........Generating Statistics.......")
-        print(self.df.head())
+        print("First 5 rows....",self.df.head())
+        print(self.df.describe())
+        
 
     def run_all(self):
         self.pass_dataset()
