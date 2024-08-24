@@ -37,14 +37,20 @@ class FSMS:
         self.df.drop_duplicates(inplace=True)
         self.df.dropna(axis=1,how='all',inplace=True)
         print("shape after dropping columns that are having completely Nan or empty",self.df.shape)
-        print(self.df.head())
+        print("Basic Cleaning Done and moving to generate report")
+    
+    def AfterBasicCLeaning(self):
+        print(".......Report is being generated.......")
+        rpt1=ProfileReport(self.df,title='Report After Cleaning')
+        rpt1.to_file("AfterBasicCleaning.html")
+
 
     def run_all(self):
         self.pass_dataset()
         self.EDABeforeStandardized()
         self.dataset_statistics()
         self.cleaning_dataset()
-
+        self.AfterBasicCLeaning()
     
     
     
