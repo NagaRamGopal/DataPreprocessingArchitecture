@@ -6,7 +6,8 @@ import pandas_profiling
 from pandas_profiling import ProfileReport
 import sys
 
-class FSMS:
+ReqData=None
+class BasicCleaning:
     def __init__(self):
         self.df = None  # Initialize the instance variable to store the dataset
 
@@ -28,7 +29,6 @@ class FSMS:
 
     def dataset_statistics(self):
         print(".........Generating Statistics.......")
-        print("First 5 rows....",self.df.head())
         print("Basic Statistics", self.df.describe())
         print("Moving to Cleaning fsm")
 
@@ -42,8 +42,16 @@ class FSMS:
     def AfterBasicCLeaning(self):
         print(".......Report is being generated.......")
         rpt1=ProfileReport(self.df,title='Report After Cleaning')
-        self.df.to_csv("ReqData.csv")
         rpt1.to_file("AfterBasicCleaning.html")
+        
+
+    def StoreReqData(self):
+        self.df.to_csv("ReqData.csv")
+        print("Data saved in file for further analysis")
+        print("...........Moving to Deeper Analysis.......")
+        global ReqData
+        ReqData = self.df
+        
 
 
     def run_all(self):
@@ -52,7 +60,11 @@ class FSMS:
         self.dataset_statistics()
         self.cleaning_dataset()
         self.AfterBasicCLeaning()
+        self.StoreReqData()
     
-    
-obj=FSMS()
+
+
+
+obj=BasicCleaning()
 obj.run_all()
+
