@@ -23,7 +23,7 @@ class FSMS:
     def EDABeforeStandardized(self):
         rpt=ProfileReport(self.df, title="Example")
         print("...........Generating HTML Report for Quick View.................")
-        rpt.to_file("FinalData.html")
+        rpt.to_file("InitialData.html")
         print("Moving to statistics fsm")
 
     def dataset_statistics(self):
