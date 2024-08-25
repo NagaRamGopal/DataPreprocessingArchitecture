@@ -21,7 +21,7 @@ class FSMS:
             print("Moving to EDA fsm")
         
     def EDABeforeStandardized(self):
-        rpt=ProfileReport(self.df, title="Example")
+        rpt=ProfileReport(self.df, title="Initial Report")
         print("...........Generating HTML Report for Quick View.................")
         rpt.to_file("InitialData.html")
         print("Moving to statistics fsm")
