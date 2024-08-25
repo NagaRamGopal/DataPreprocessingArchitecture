@@ -42,6 +42,7 @@ class FSMS:
     def AfterBasicCLeaning(self):
         print(".......Report is being generated.......")
         rpt1=ProfileReport(self.df,title='Report After Cleaning')
+        self.df.to_csv("ReqData.csv")
         rpt1.to_file("AfterBasicCleaning.html")
 
 
