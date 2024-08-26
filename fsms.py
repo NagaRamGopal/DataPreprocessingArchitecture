@@ -32,6 +32,7 @@ class BasicCleaning:
         print("Basic Statistics", self.df.describe())
         print("Shape of DataSet before cleaning",self.df.shape)
         print("..........Dropping Columns............")
+        
 
     
     def DroppingColumns(self, threshold=40):
@@ -47,7 +48,13 @@ class BasicCleaning:
         rows_to_drop = missing_percentage_by_row[missing_percentage_by_row > 50].index
         self.df.drop(index=rows_to_drop, inplace=True)
         print("Shape of DataSet after cleaning",self.df.shape)
+
+    def DataMissingPercentage(self):
+        total_data=self.df.size
+        missing_data=self.df.isnull().sum().sum()
+        print("Missing Data Percentage is",((missing_data/total_data)*100))
     
+
     
     def AfterBasicCLeaning(self):
         print(".......Report is being generated.......")
@@ -70,6 +77,7 @@ class BasicCleaning:
         self.dataset_statistics()
         self.DroppingColumns()
         self.DroppingRows()
+        self.DataMissingPercentage()
         self.AfterBasicCLeaning()
         self.StoreReqData()
     
