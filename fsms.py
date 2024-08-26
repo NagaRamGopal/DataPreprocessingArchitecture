@@ -13,7 +13,7 @@ class BasicCleaning:
 
     def pass_dataset(self):
         try:
-            self.df = pd.read_csv(r'C:\Users\ramgo\OneDrive\Desktop\Learn\DiwaliSalesAnalysis\DiwaliSales\Diwali Sales Data.csv', encoding='ISO-8859-1')
+            self.df = pd.read_csv(r'C:\Users\ramgo\OneDrive\Desktop\Learn\AIML Architecture\DataPreprocessingArchitecture\Diwali Sales Data.csv', encoding='ISO-8859-1')
             print("...........Data Set Imported Successfully.........")
         except:
             print("Please check the file/path given")
@@ -38,6 +38,14 @@ class BasicCleaning:
         self.df.dropna(axis=1,how='all',inplace=True)
         print("shape after dropping columns that are having completely Nan or empty",self.df.shape)
         print("Basic Cleaning Done and moving to generate report")
+
+    def AdvanceCleaningFilling(self):
+        total_values=self.df.size
+        #print(total_values)
+        #print(self.df.isnull().sum())
+        missing_percentage=((self.df.isnull().sum().sum())/(total_values))*100
+        if (missing_percentage<5):
+            self.df.dropna(inplace=True)
     
     def AfterBasicCLeaning(self):
         print(".......Report is being generated.......")
@@ -59,6 +67,7 @@ class BasicCleaning:
         self.EDABeforeStandardized()
         self.dataset_statistics()
         self.cleaning_dataset()
+        self.AdvanceCleaningFilling()
         self.AfterBasicCLeaning()
         self.StoreReqData()
     
