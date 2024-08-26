@@ -30,22 +30,24 @@ class BasicCleaning:
     def dataset_statistics(self):
         print(".........Generating Statistics.......")
         print("Basic Statistics", self.df.describe())
-        print("Moving to Cleaning fsm")
+        print("Shape of DataSet before cleaning",self.df.shape)
+        print("..........Dropping Columns............")
 
-    def cleaning_dataset(self):
-        print(".....Cleaning Started......")
-        self.df.drop_duplicates(inplace=True)
-        self.df.dropna(axis=1,how='all',inplace=True)
-        print("shape after dropping columns that are having completely Nan or empty",self.df.shape)
-        print("Basic Cleaning Done and moving to generate report")
-
-    def AdvanceCleaningFilling(self):
-        total_values=self.df.size
-        #print(total_values)
-        #print(self.df.isnull().sum())
-        missing_percentage=((self.df.isnull().sum().sum())/(total_values))*100
-        if (missing_percentage<5):
-            self.df.dropna(inplace=True)
+    
+    def DroppingColumns(self, threshold=40):
+        missing_count=self.df.isna().sum()
+        missing_count_bypercentage=(missing_count/len(self.df))*100
+        columns_to_drop = missing_count_bypercentage[missing_count_bypercentage > threshold].index
+        self.df.drop(columns=columns_to_drop, inplace=True)
+        print("...........Dropping Rows..........")
+    
+    def DroppingRows(self, threshold=50):
+        missing_counts_by_row = self.df.isnull().sum(axis=1)
+        missing_percentage_by_row = (missing_counts_by_row / len(self.df.columns)) * 100
+        rows_to_drop = missing_percentage_by_row[missing_percentage_by_row > 50].index
+        self.df.drop(index=rows_to_drop, inplace=True)
+        print("Shape of DataSet after cleaning",self.df.shape)
+    
     
     def AfterBasicCLeaning(self):
         print(".......Report is being generated.......")
@@ -66,8 +68,8 @@ class BasicCleaning:
         self.pass_dataset()
         self.EDABeforeStandardized()
         self.dataset_statistics()
-        self.cleaning_dataset()
-        self.AdvanceCleaningFilling()
+        self.DroppingColumns()
+        self.DroppingRows()
         self.AfterBasicCLeaning()
         self.StoreReqData()
     
